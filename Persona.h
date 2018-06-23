@@ -32,8 +32,8 @@ class Persona{
         string getColorPiel();
         bool isFertil();
 
-        const Persona operator +(const Persona&);
-        const Persona operator *(const Persona&);
+        Persona operator +(Persona&);
+        Persona operator *(Persona&);
 
 
 

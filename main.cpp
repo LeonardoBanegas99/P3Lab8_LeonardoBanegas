@@ -17,6 +17,7 @@ int main(){
         cout << "1) Agregar Persona" <<  endl;
         cout << "2) Eliminar Persona" << endl;
         cout << "3) Simulacion" << endl;
+        cout << "4) Salir" << endl;
         cin >> opcion;
         switch(opcion){
             case 1:{
@@ -24,6 +25,10 @@ int main(){
                 bool fertil;
                 int gen=0;
                 int f=0;
+
+                int cabello=0,ojos=0,piel=0;
+
+
                 cout << "Ingrese Nombre: " << endl;
                 cin >> nombre;
                 cout << "Genero 1)Masculino 2)Femenino: " << endl;
@@ -46,12 +51,86 @@ int main(){
                         }
                     }
                 }
-                cout << "Ingrese Color de Cabello: " << endl;
-                cin >> colorCabello;
-                cout << "Ingrese Color de Ojos: " << endl;
-                cin >> colorOjos;
-                cout << "Ingrese Color de Piel: " << endl;
-                cin >> colorPiel;
+
+                cout << "Ingrese Color de Cabello: 1)Negro 2)Rubio 3)Cafe" << endl;
+                cin >> cabello;
+                if(cabello==1){
+                    colorCabello = "Negro";
+                }else if(cabello==2){
+                    colorCabello = "Rubio";
+                }else if(cabello==3){
+                    colorCabello = "Cafe";
+                }else{
+                    bool s = true;
+                    while(s == true){
+                        cout << "Opcion Invalida "<< endl <<"Ingrese Color de Cabello: 1)Negro 2)Rubio 3)Cafe" << endl;
+                        cin >> cabello;
+                        if(cabello==1){
+                            colorCabello = "Negro";
+                            s = false;
+                        }else if(cabello==2){
+                            colorCabello = "Rubio";
+                            s = false;
+                        }else if(cabello==3){
+                            colorCabello = "Cafe";
+                            s = false;
+                        }
+                    }
+                }
+                cout << "Ingrese Color de Ojos: 1)Azul 2)Verde 3)Cafe" << endl;
+                cin >> ojos;
+
+                if(ojos==1){
+                    colorOjos = "Azul";
+                }else if(ojos==2){
+                    colorOjos = "Verde";
+                }else if(ojos==3){
+                    colorOjos = "Cafe";
+                }else{
+                    bool s = true;
+                    while(s == true){
+                        cout << "Opcion Invalida "<< endl <<"Ingrese Color de Ojos: 1)Azul 2)Verde 3)Cafe" << endl;
+                        cin >> ojos;
+                        if(ojos==1){
+                            colorOjos = "Azul";
+                            s = false;
+                        }else if(ojos==2){
+                            colorOjos = "Verde";
+                            s = false;
+                        }else if(ojos==3){
+                            colorOjos = "Cafe";
+                            s = false;
+                        }
+                    }
+                }
+
+                cout << "Ingrese Color de Piel: 1)Blanco 2)Negro 2)Canela" << endl;
+                cin >> piel;
+
+                if(piel==1){
+                    colorPiel = "Blanco";
+                }else if(piel==2){
+                    colorPiel = "Negro";
+                }else if(piel==3){
+                    colorPiel = "Canela";
+                }else{
+                    bool s = true;
+                    while(s == true){
+                        cout << "Opcion Invalida "<< endl <<"Ingrese Color de Piel: 1)Blanco 2)Negro 3)Canela" << endl;
+                        cin >> piel;
+                        if(piel==1){
+                            colorPiel = "Blanco";
+                            s = false;
+                        }else if(piel==2){
+                            colorPiel = "Negro";
+                            s = false;
+                        }else if(piel==3){
+                            colorPiel = "Canela";
+                            s = false;
+                        }
+                    }
+                }
+
                 cout << "Es Fertil? 1)Si 2) No: " << endl;
                 cin >> f;
                 if(f==1){
@@ -118,27 +197,31 @@ int main(){
 
                                 
                                     if(r1>0 && r1<7 && (per1.isFertil()==true) && (per2.isFertil()==true)) {
-                                        cout << "La Mujer Quedo Embarazada" << endl;
+                                        cout << "Le Gusta Vivir al Limite. La Mujer Quedo Embarazada" << endl;
 
                                         int r2=0;
                                         srand(time(NULL));
                                         r2 = (rand()&100) + 1;
 
+                                        Persona p;
+
                                         if(r2>0 && r2<51){
                                             cout << "El bebe es Hombre" << endl;
                                             if(per1.getGenero() == "Masculino"){
-                                                per1 * per2;
+                                                p = per1 * per2;
                                             }else if(per2.getGenero() == "Masculino"){
-                                                per2 * per1;
+                                                p = per2 * per1;
                                             }
                                         }else{
                                             cout << "El bebe es Mujer" << endl;
                                             if(per1.getGenero() == "Femenino"){
-                                                per1 * per2;
+                                                p = per1 * per2;
                                             }else if(per2.getGenero() == "Femenino"){
-                                                per2 * per1;
+                                                p = per2 * per1;
                                             }
                                         }
+                                        personas.push_back(p);
+                                        cout << "Se Agrego el Bebe" << endl;
                                     }else if((per1.isFertil()==false) || (per2.isFertil()==false)){
                                         cout << "La Mujer No Quedo Embarazada" << endl;
                                     }
@@ -148,6 +231,7 @@ int main(){
                             }else{
                                 cout << "No se Permite el Coito entre Personas de Mismo Genero" << endl;
                             }
+                            break;
                         }
                         case 2:{
                             if(per1.getGenero() != per2.getGenero()){
@@ -167,13 +251,25 @@ int main(){
                                         int r2=0;
                                         srand(time(NULL));
                                         r2 = (rand()&100) + 1;
-
+                                        Persona p;
                                         if(r2>0 && r2<51){
                                             cout << "El bebe es Hombre" << endl;
+                                            if(per1.getGenero() == "Masculino"){
+                                                p = per1 * per2;
+                                            }else if(per2.getGenero() == "Masculino"){
+                                                p = per2 * per1;
+                                            }
                                         }else{
                                             cout << "El bebe es Mujer" << endl;
+                                            if(per1.getGenero() == "Femenino"){
+                                                p = per1 * per2;
+                                            }else if(per2.getGenero() == "Femenino"){
+                                                p = per2 * per1;
+                                            }
                                         }
-                                    }else if((per1.isFertil()==false) || (per2.isFertil()==false)){
+                                        personas.push_back(p);
+                                        cout << "Se Agrego el Bebe" << endl;
+                                    }else{
                                         cout << "La Mujer No Quedo Embarazada" << endl;
                                     }
 
@@ -190,6 +286,11 @@ int main(){
                 }else{
                     cout << "No hay mas de 2 Personas Agregadas" << endl;
                 }
+                break;
+            }
+            case 4:{
+                salir = true;
+                cout << "Hasta Luego!!!" << endl;
                 break;
             }
         }
